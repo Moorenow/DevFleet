@@ -18,7 +18,7 @@
   </table>
 </div>
 
-## Indicacones para ejecutar este proyecto:
+## Indicaciones para ejecutar este proyecto:
 
 * git clone https://github.com/Moorenow/DevFleet.git
 * composer install
