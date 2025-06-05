@@ -22,10 +22,7 @@ const showingNavigationDropdown = ref(false);
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex shrink-0 items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800"
-                                    />
+                                <Link :href="route('adminproyectos')">
                                 </Link>
                             </div>
 
@@ -34,10 +31,28 @@ const showingNavigationDropdown = ref(false);
                                 class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
                             >
                                 <NavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
+                                    :href="route('adminproyectos')"
+                                    :active="route().current('adminproyectos')"
                                 >
                                     Administración de proyectos
+                                </NavLink>
+                                <NavLink
+                                    :href="route('listaproyectos')"
+                                    :active="route().current('listaproyectos')"
+                                >
+                                    Lista de proyectos
+                                </NavLink>
+                                <NavLink
+                                    :href="route('detallesproyectos')"
+                                    :active="route().current('detallesproyectos')"
+                                >
+                                    Detalles del proyecto
+                                </NavLink>
+                                <NavLink
+                                    :href="route('admintareas')"
+                                    :active="route().current('admintareas')"
+                                >
+                                    Administración de tareas
                                 </NavLink>
                             </div>
                         </div>
@@ -141,10 +156,10 @@ const showingNavigationDropdown = ref(false);
                 >
                     <div class="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
+                            :href="route('adminproyectos')"
+                            :active="route().current('adminproyectos')"
                         >
-                            Dashboard
+                            Administración de proyectos
                         </ResponsiveNavLink>
                     </div>
 
