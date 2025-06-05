@@ -1,12 +1,7 @@
 <template>
-  <h1>Hola desde Vue 3 + Laravel 10 🎉 app</h1>
+    <router-view v-slot="{ Component, route }">
+        <div :key="route.name">
+            <Component :is="Component" />
+        </div>
+    </router-view>
 </template>
-
-<script setup>
-</script>
-
-<style scoped>
-h1 {
-  color: #42b983;
-}
-</style>
