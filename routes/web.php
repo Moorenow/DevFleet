@@ -14,9 +14,21 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/adminproyectos', function () {
+    return Inertia::render('Adminproyectos');
+})->middleware(['auth', 'verified'])->name('adminproyectos');
+
+Route::get('/listaproyectos', function () {
+    return Inertia::render('Listaproyectos');
+})->middleware(['auth', 'verified'])->name('listaproyectos');
+
+Route::get('/detallesproyectos', function () {
+    return Inertia::render('Detallesproyectos');
+})->middleware(['auth', 'verified'])->name('detallesproyectos');
+
+Route::get('/admintareas', function () {
+    return Inertia::render('Admintareas');
+})->middleware(['auth', 'verified'])->name('admintareas');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
