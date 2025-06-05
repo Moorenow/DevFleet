@@ -1,6 +1,10 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+
+const props = defineProps({
+    auth: Object,
+});
 </script>
 
 <template>
@@ -17,7 +21,7 @@ import { Head } from '@inertiajs/vue3';
                 <img class="justify-self-center size-10 rounded-full ring-2 ring-white"
                     src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
                     alt="">
-                <p class="text-sm text-gray-600">Jesus Emmanuel Lopez Ortiz</p>
+                <p class="text-sm text-gray-600">{{ auth.user.name }}</p>
             </div>
             <table
                 class="w-full table-auto border-separate border-spacing-2 border border-gray-400 dark:border-gray-500">

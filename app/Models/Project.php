@@ -13,6 +13,7 @@ class Project extends Model
         'name',
         'description',
         'status',
+        'user_id',
     ];
 
     public function user()
