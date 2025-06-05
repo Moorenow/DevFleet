@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-const showModal = ref(false)
+const showModal = ref(false);
 </script>
 
 <template>
