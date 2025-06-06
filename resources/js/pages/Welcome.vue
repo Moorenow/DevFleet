@@ -1,13 +1,10 @@
 <script setup>
+import { onMounted } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 
 defineProps({
-    canLogin: {
-        type: Boolean,
-    },
-    canRegister: {
-        type: Boolean,
-    },
+    canLogin: Boolean,
+    canRegister: Boolean,
     laravelVersion: {
         type: String,
         required: true,
@@ -17,51 +14,53 @@ defineProps({
         required: true,
     },
 });
+
+onMounted(() => {
+    if (!document.querySelector('script[src*="spline-viewer"]')) {
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = 'https://unpkg.com/@splinetool/viewer@1.10.2/build/spline-viewer.js';
+        document.body.appendChild(script);
+    }
+});
 </script>
 
 <template>
+
     <Head title="Welcome" />
+
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-        <div
-            class="relative flex min-h-screen flex-col items-center justify-center selection:text-white"
-        >
-            <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                <header
-                    class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3"
-                >
-                    <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
-                        <Link
-                            v-if="$page.props.auth.user"
-                            :href="route('adminproyectos')"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                        >
+        <div class="relative min-h-screen w-full overflow-hidden">
+            <spline-viewer url="https://prod.spline.design/L9S3PGoLfEwLpSmB/scene.splinecode"
+                class="absolute inset-0 z-0"></spline-viewer>
+
+            <div class="relative z-10 flex min-h-screen flex-col items-center justify-center selection:text-white">
+                <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
+                    <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
+                        <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end space-x-4">
+                            <Link v-if="$page.props.auth.user" :href="route('adminproyectos')"
+                                class="text-xl rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                             Regresar a la administración de DevFleet
-                        </Link>
+                            </Link>
 
-                        <template v-else>
-                            <Link
-                                :href="route('login')"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            >
+                            <template v-else>
+                                <Link :href="route('login')"
+                                    class="text-xl rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                 Iniciar sesión
-                            </Link>
+                                </Link>
 
-                            <Link
-                                v-if="canRegister"
-                                :href="route('register')"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            >
+                                <Link v-if="canRegister" :href="route('register')"
+                                    class="text-xl rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                 Registrarse
-                            </Link>
-                        </template>
-                    </nav>
-                </header>
+                                </Link>
+                            </template>
+                        </nav>
+                    </header>
 
-                <footer
-                    class="py-16 text-center text-sm text-black dark:text-white/70"
-                >
-                    DevFleet 1.0.0
-                </footer>
+                    <footer class="py-16 text-center text-xl text-black dark:text-white/70">
+                        DevFleet 1.0.0
+                    </footer>
+                </div>
             </div>
         </div>
     </div>
