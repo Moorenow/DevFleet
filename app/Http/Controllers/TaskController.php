@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ResponseHelper;
+use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -26,17 +29,31 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
-        //
+        $task = Task::create($request->validated());
+
+        return ResponseHelper::created(
+            'La tarea se ha creado correctamente',
+            ['task' => $task]
+        );
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
+    public function show($id)
     {
-        //
+        $taskList = Task::where('project_id', $id)->get();
+
+        if ($taskList->isEmpty()) {
+            return ResponseHelper::notFound('No hay tareas para este proyecto');
+        }
+
+        return ResponseHelper::ok(
+            'Esta es la lista de tareas',
+            ['tasks' => $taskList]
+        );
     }
 
     /**
@@ -50,16 +67,31 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(UpdateTaskRequest $request, $id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        $task->update([
+            'title' => $request->title,
+            'due_date' => $request->due_date,
+        ]);
+
+        return ResponseHelper::ok(
+            'El proyecto se ha actualizado correctamente',
+            ['project' => $task]
+        );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $task->delete();
+
+        return ResponseHelper::ok(
+            'El proyecto se ha eliminado correctamente'
+        );
     }
 }

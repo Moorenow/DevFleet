@@ -20,6 +20,14 @@ class ResponseHelper{
         ], $extra), 200);
     }
 
+    public static function notFound($message = 'No se encontraron resultados', $extra = [])
+    {
+        return response()->json(array_merge([
+            'error' => 'true',
+            'message' => $message,
+        ], $extra), 404);
+    }
+
     public static function error($message = 'Ha ocurrido un error', $extra = [])
     {
         return response()->json(array_merge([

@@ -34,25 +34,13 @@ const showingNavigationDropdown = ref(false);
                                     :href="route('adminproyectos')"
                                     :active="route().current('adminproyectos')"
                                 >
-                                    Administración de proyectos
-                                </NavLink>
-                                <NavLink
-                                    :href="route('listaproyectos')"
-                                    :active="route().current('listaproyectos')"
-                                >
-                                    Lista de proyectos
-                                </NavLink>
-                                <NavLink
-                                    :href="route('detallesproyectos')"
-                                    :active="route().current('detallesproyectos')"
-                                >
-                                    Detalles del proyecto
+                                    Proyectos
                                 </NavLink>
                                 <NavLink
                                     :href="route('admintareas')"
                                     :active="route().current('admintareas')"
                                 >
-                                    Administración de tareas
+                                    Tareas
                                 </NavLink>
                             </div>
                         </div>
