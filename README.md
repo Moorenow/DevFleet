@@ -24,6 +24,7 @@
 * composer install
 
 * npm install
+* php artisan migrate
 * php artisan serve
 
 * npm run dev
@@ -34,4 +35,4 @@ Evaluar de forma práctica las habilidades de desarrollo de un programador fulls
 
 <h2>Estatus del proyecto:</h2>
 
-Actualmente solo se ha integrado una vista básica con Vue 3, las instrucciones completas para el backend y demás funcionalidades serán agregadas una vez finalizada la implementación.
+El CRUD en la vista de proyecto ya se encuentra en funcionamiento; solo falta complementar la actualización del estatus mediante las tareas.
