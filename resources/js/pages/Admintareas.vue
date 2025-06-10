@@ -2,6 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
+import Swal from 'sweetalert2'
 import moment from 'moment';
 
 const actions = ref(true),
@@ -22,6 +23,10 @@ const deleteTask = async (id) => {
     try {
         await axios.delete(`/tasks/${id}`)
         await getListTaskData();
+        Swal.fire({
+            icon: "success",
+            title: "La tarea se elimino correctamente",
+        });
     } catch (error) {
         console.error('Error al eliminar la tarea:', error);
     }
@@ -58,6 +63,10 @@ const createTasks = async () => {
         });
         await getListTaskData();
         clearInputs();
+        Swal.fire({
+            icon: "success",
+            title: "La tarea se añadió correctamente al proyecto",
+        });
     } catch (error) {
         console.error('Error al crear la tarea:', error);
     }
@@ -78,6 +87,10 @@ const updateTask = async () => {
         });
         await getListTaskData();
         clearInputs();
+        Swal.fire({
+            icon: "success",
+            title: "La tarea se actualizo correctamente",
+        });
     } catch (error) {
         console.error('Error al actualizar la tarea:', error);
     }

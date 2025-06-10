@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import Swal from 'sweetalert2'
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 
@@ -35,6 +36,10 @@ const createProject = async () => {
         });
         await fetchProjects();
         await clearInputs();
+        Swal.fire({
+            icon: "success",
+            title: "El nuevo proyecto ha sido creado satisfactoriamente",
+        });
     } catch (error) {
         console.error('Error al crear el proyecto:', error);
     }
@@ -61,6 +66,10 @@ const getListTaskData = async id => {
         taskData.value = response.data.tasks
         showModal.value = true
     } catch (error) {
+        Swal.fire({
+            icon: "info",
+            title: "Este proyecto no cuenta con tareas",
+        });
         console.error('Error al obtener las tareas del proyecto', error);
     }
 }
@@ -74,6 +83,10 @@ const updateProject = async () => {
         });
         await fetchProjects();
         await clearInputs();
+        Swal.fire({
+            icon: "success",
+            title: "El proyecto ha sido actualizado",
+        });
     } catch (error) {
         console.error('Error al editar el proyecto:', error);
     }
@@ -83,6 +96,10 @@ const deleteProject = async id => {
     try {
         await axios.delete(`/projects/${id}`);
         await fetchProjects();
+        Swal.fire({
+            icon: "success",
+            title: "El proyecto ha sido eliminado",
+        });
     } catch (error) {
         console.error('Error al eliminar el proyecto:', error);
     }
