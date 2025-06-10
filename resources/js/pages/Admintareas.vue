@@ -35,7 +35,6 @@ const toggleComplete = async (task) => {
             completed: task.completed
         });
     } catch (error) {
-        // Si hay error, revierte el cambio local
         task.completed = original;
         console.error('Error al actualizar el estado de la tarea:', error);
     }
@@ -60,7 +59,7 @@ const createTasks = async () => {
         await getListTaskData();
         clearInputs();
     } catch (error) {
-        console.error('Error al crear el proyecto:', error);
+        console.error('Error al crear la tarea:', error);
     }
 };
 
@@ -77,10 +76,10 @@ const updateTask = async () => {
             title: taskName.value,
             due_date: dueDate.value
         });
-        await fetchProjects();
+        await getListTaskData();
         clearInputs();
     } catch (error) {
-        console.error('Error al editar el proyecto:', error);
+        console.error('Error al actualizar la tarea:', error);
     }
 };
 
@@ -95,7 +94,7 @@ const getListTaskData = async () => {
         const response = await axios.get(`/tasks/${selProjData.value.id}`);
         taskData.value = response.data.tasks
     } catch (error) {
-        console.error('Error al obtener los proyectos:', error);
+        console.error('Error al obtener las tareas del proyecto:', error);
     }
 }
 

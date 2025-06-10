@@ -13,6 +13,7 @@ const projectId = ref(null),
     description = ref(null),
     status = ref(null),
     projects = ref([]),
+    taskData = ref([]),
     showModal = ref(false),
     actions = ref(true);
 
@@ -53,6 +54,16 @@ const clearInputs = async () => {
     description.value = null;
     status.value = null;
 };
+
+const getListTaskData = async id => {
+    try {
+        const response = await axios.get(`/tasks/${id}`);
+        taskData.value = response.data.tasks
+        showModal.value = true
+    } catch (error) {
+        console.error('Error al obtener las tareas del proyecto', error);
+    }
+}
 
 const updateProject = async () => {
     try {
@@ -173,7 +184,7 @@ onMounted(fetchProjects);
                             </span>
                         </td>
                         <td class="px-4 py-3 text-center bg-white">
-                            <button @click="showModal = true"
+                            <button @click="getListTaskData(items.id)"
                                 class="text-green-600 hover:underline text-lg">👁️</button>
                         </td>
                         <td class="px-4 py-3 text-center bg-white">
@@ -201,16 +212,7 @@ onMounted(fetchProjects);
                                             proyecto</h3>
                                         <div class="mt-2">
                                             <ul class="list-disc pl-5">
-                                                <li>Diseñar la interfaz del usuario con Vue 3 y Vuetify</li>
-                                                <li>Implementar la navegación con Vue Router y proteger rutas con guards
-                                                </li>
-                                                <li>Desarrollar componentes reutilizables para formularios y tablas</li>
-                                                <li>Conectar el frontend con la API de Laravel usando Axios</li>
-                                                <li>Validar formularios en el frontend y backend</li>
-                                                <li>Crear endpoints en Laravel para gestión de usuarios y tareas</li>
-                                                <li>Aplicar middlewares de autenticación y autorización en Laravel</li>
-                                                <li>Configurar base de datos y relaciones Eloquent (por ejemplo,
-                                                    proyectos y tareas)</li>
+                                                <li v-for="items in taskData" :key="items.id">{{ items.title }}</li>
                                             </ul>
                                         </div>
                                     </div>

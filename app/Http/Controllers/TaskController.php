@@ -77,8 +77,8 @@ class TaskController extends Controller
         ]);
 
         return ResponseHelper::ok(
-            'El proyecto se ha actualizado correctamente',
-            ['project' => $task]
+            'La tarea se ha actualizado correctamente',
+            ['task' => $task]
         );
     }
 
@@ -91,7 +91,7 @@ class TaskController extends Controller
         $task->delete();
 
         return ResponseHelper::ok(
-            'El proyecto se ha eliminado correctamente'
+            'La tarea se ha eliminado correctamente'
         );
     }
 }
